@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEBWEAVER | Topic-Guided Crawler</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <header>
+        <div class="logo">🕸️ WEBWEAVER</div>
+        <p>Heuristic-Guided Web Crawler & Topic-Sensitive PageRank</p>
+    </header>
+
+    <div class="control-panel card">
+        <div class="input-group main-inputs">
+            <input type="text" id="startUrl" placeholder="Target URL (e.g., https://en.wikipedia.org/wiki/Music)" required>
+            <input type="text" id="topic" placeholder="Target Topic (e.g., rock music)" required>
+        </div>
+
+        <div class="input-group param-inputs">
+            <div class="param">
+                <label>Top-K</label>
+                <input type="number" id="topK" value="5" min="1" max="15" title="Branching Factor">
+            </div>
+            <div class="param">
+                <label>Depth</label>
+                <input type="number" id="depth" value="3" min="1" max="5">
+            </div>
+            <div class="param">
+                <label>Max Pages</label>
+                <input type="number" id="maxPages" value="40" min="1" max="150">
+            </div>
+            <div class="param">
+                <label>Result Limit</label>
+                <input type="number" id="resultLimit" value="15" min="1" max="50">
+            </div>
+            <button onclick="startCrawl()" id="crawlBtn">Start Crawl</button>
+        </div>
+    </div>
+
+    <div id="loading" class="hidden">
+        <div class="spinner"></div>
+        <p id="loadingText">The Heuristic Engine is crawling and scoring the web...</p>
+    </div>
+
+    <div id="results" class="hidden">
+        <div class="stats card">
+            <h2>Total Pages Crawled: <span id="totalVisited">0</span></h2>
+        </div>
+
+        <div class="dashboard">
+            <div class="card table-card">
+                <h3>Top Ranked Pages</h3>
+                <div class="table-wrapper">
+                    <table id="rankTable">
+                        <thead>
+                        <tr>
+                            <th>Rank</th>
+                            <th>URL</th>
+                            <th>Score</th>
+                        </tr>
+                        </thead>
+                        <tbody id="rankBody"></tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card graph-card">
+                <h3>Network Graph Visualization</h3>
+                <div id="networkGraph"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
